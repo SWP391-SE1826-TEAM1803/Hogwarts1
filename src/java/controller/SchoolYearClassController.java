@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.ResultSet;
 import java.util.Vector;
 import model.DAOSchoolYearClass;
 
@@ -75,6 +76,17 @@ public class SchoolYearClassController extends HttpServlet {
             String syC_ID = request.getParameter("SyC_ID");
             dao.deleteSchoolYearClass(syC_ID);
             response.sendRedirect("SchoolYearClassControllerURL?service=listAll");
+        }
+        
+        if (service.equals("searchBySyID")) {
+            String syID = request.getParameter("SyID");            
+            // Get all school year classes
+            Vector<SchoolYearClass> vector = dao.getAllSchoolYearClasses("SELECT * FROM SchoolYear_Class Where SyID = '" + syID + "'");
+            // Set data to request
+            request.setAttribute("data", vector);
+            // Forward to JSP
+            RequestDispatcher dispatcher = request.getRequestDispatcher("SchoolYearDetail.jsp");
+            dispatcher.forward(request, response);
         }
     }
 

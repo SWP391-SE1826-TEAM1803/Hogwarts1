@@ -69,6 +69,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Start Date</th>
                                 <th scope="col">End Date</th>
+                                <th scope="col" style="text-align: center;">Detail</th>
                                 <th scope="col" style="text-align: center;">Actions</th>
                             </tr>
                         </thead>
@@ -83,6 +84,13 @@
                                 <td><%= sy.getDateStart() %></td>
                                 <td><%= sy.getDateEnd() %></td>
                                 <td style="text-align: center;">
+                                    <a class="btn btn-outline-info btn-icon-text" href="SchoolYearClassControllerURL?service=searchBySyID&SyID=<%= sy.getSyID() %>">
+                                        <i class="mdi mdi-information"></i> Detail
+                                    </a>
+                                    
+                                </td>
+                                <td style="text-align: center;">
+                                    
                                     <a class="btn btn-outline-warning btn-icon-text" href="SchoolYearControllerURL?service=update&SyID=<%=sy.getSyID()%>">
                                         <i class="mdi mdi-refresh"></i> Update
                                     </a>

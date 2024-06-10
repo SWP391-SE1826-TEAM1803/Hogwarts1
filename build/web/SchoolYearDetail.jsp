@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.Vector,entity.SchoolYear"%>
+<%@page import="java.util.Vector, entity.SchoolYearClass, entity.SchoolYear, entity.Class, model.DAOSchoolYear, model.DAOClass"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,56 +45,54 @@
     <%@include file="HeaderAdmin.jsp"%>
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>School Years</h1>
+            <h1>School Year Detail</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HomeAdmin.jsp">Home</a></li>
-                    <li class="breadcrumb-item active">School Years</li>
+                    <li class="breadcrumb-item"><a href="SchoolYearControllerURL?service=listAll">School Years</a></li>
+                    <li class="breadcrumb-item active">Detail</li>
                 </ol>
             </nav>
         </div>
 
         <div class="col-12">
-            <div class="card recent-sales overflow-auto">
+            <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="card-title">School Years List</h5>
-                        <a href="InsertSchoolYear.jsp" class="btn btn-success">Add New School Year</a>
-                    </div>
-                    
-                    <table class="table table-borderless datatable">
+                    <h5 class="card-title">School Year Information</h5>
+                      <table class="table table-borderless datatable">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">End Date</th>
+                                <th scope="col">Class ID</th>
+                                <th scope="col">Class Name</th>
+                                <th scope="col">Curriculum ID</th>
                                 <th scope="col" style="text-align: center;">Detail</th>
                                 <th scope="col" style="text-align: center;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <% 
-                                Vector<SchoolYear> schoolYears = (Vector<SchoolYear>)request.getAttribute("data");
-                                for (SchoolYear sy : schoolYears) {
+                            <%  
+                                DAOClass dao = new DAOClass();
+                                Vector<SchoolYearClass> syClasses = (Vector<SchoolYearClass>) request.getAttribute("data");
+                                for (SchoolYearClass syClass : syClasses) {
+                                Class classObj = dao.getClassByID(syClass.getClassID());
                             %>
                             <tr>
-                                <td><%= sy.getSyID() %></td>
-                                <td><%= sy.getSyName() %></td>
-                                <td><%= sy.getDateStart() %></td>
-                                <td><%= sy.getDateEnd() %></td>
+                                <td><%= syClass.getSyC_ID() %></td>
+                                <td><%= syClass.getClassID() %></td>
+                                <td><%= classObj != null ? classObj.getClassName() : "N/A" %></td>
+                                <td><%= syClass.getCurID() %></td>
                                 <td style="text-align: center;">
-                                    <a class="btn btn-outline-info btn-icon-text" href="SchoolYearClassControllerURL?service=searchBySyID&SyID=<%= sy.getSyID() %>">
+                                    <a class="btn btn-outline-info btn-icon-text" href="SchoolYearClassDetail.jsp?SyC_ID=<%=syClass.getSyC_ID()%>">
                                         <i class="mdi mdi-information"></i> Detail
-                                    </a>
-                                    
+                                    </a>                                    
                                 </td>
                                 <td style="text-align: center;">
                                     
-                                    <a class="btn btn-outline-warning btn-icon-text" href="SchoolYearControllerURL?service=update&SyID=<%=sy.getSyID()%>">
+                                    <a class="btn btn-outline-warning btn-icon-text" href="SchoolYearClassControllerURL?service=updateSchoolYearClass&SyC_ID=<%=syClass.getSyC_ID()%>">
                                         <i class="mdi mdi-refresh"></i> Update
                                     </a>
-                                    <a class="btn btn-outline-danger btn-icon-text" href="SchoolYearControllerURL?service=delete&SyID=<%=sy.getSyID()%>">
+                                    <a class="btn btn-outline-danger btn-icon-text" href="SchoolYearClassControllerURL?service=deleteSchoolYearClass&SyC_ID=<%=syClass.getSyC_ID()%>">
                                         <i class="mdi mdi-delete-forever"></i> Delete
                                     </a>
                                 </td>
@@ -102,6 +100,7 @@
                             <% } %>
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

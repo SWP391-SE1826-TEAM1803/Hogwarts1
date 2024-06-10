@@ -73,6 +73,27 @@ public class DAOClass extends DBConnect {
         }
         return vector;
     }
+    
+    public Class getClassByID(String classID) {
+    Class classObj = null;
+    String sql = "SELECT * FROM Class WHERE ClassID=?";
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, classID);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                classObj = new Class(
+                    rs.getString("ClassID"),
+                    rs.getString("ClassName"),
+                    rs.getString("CateID")
+                );
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return classObj;
+}
+
 
     public static void main(String[] args) {
         DAOClass dao = new DAOClass();
