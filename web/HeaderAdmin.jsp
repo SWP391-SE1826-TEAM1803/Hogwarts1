@@ -319,6 +319,19 @@
                     </a>
                 </li><!-- End Profile Page Nav --><!-- End Profile Page Nav -->
 
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="TeacherControllerURL?service=listAll">
+                        <i class="bi bi-pen"></i>
+                        <span>Teachers</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="MenuControllerURL?service=listAll">
+                        <i class="bi bi-egg"></i>
+                        <span>Menus</span>
+                    </a>
+                </li>
             </ul>
 
         </aside><!-- End Sidebar-->
