@@ -24,7 +24,7 @@ public class DBConnect {
    }
     public DBConnect() {
         this("jdbc:sqlserver://localhost:1433;databaseName=HogwartsDB",
-                "sa","123456");
+                "sa","12345678");
     }
     public ResultSet getData(String sql){
         ResultSet rs=null;

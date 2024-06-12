@@ -5,8 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.Vector, entity.Teacher"%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,12 +43,12 @@
     <%@include file="HeaderAdmin.jsp"%>
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Update Teacher</h1>
+            <h1>Insert New Teacher</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HomeAdmin.jsp">Home</a></li>
-                    <li class="breadcrumb-item"><a href="TeacherControllerURL?service=listAll">Teachers</a></li>
-                    <li class="breadcrumb-item active">Update Teacher</li>
+                    <li class="breadcrumb-item active"><a href="TeacherControllerURL?service=listAll">Teachers</a></li>
+                    <li class="breadcrumb-item active">Insert Teacher</li>
                 </ol>
             </nav>
         </div>
@@ -58,43 +56,39 @@
         <div class="container mt-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Edit Information</h5>
-                    
-                    <% 
-                        Vector<Teacher> vector = (Vector<Teacher>) request.getAttribute("vector");
-                        if (vector != null && vector.size() > 0) {
-                            Teacher teacher = vector.get(0);
-                    %>
+                    <h5 class="card-title">New Teacher Information</h5>
+
                     <!-- Horizontal Form -->
                     <form action="TeacherControllerURL" method="post">
-                        <input type="hidden" name="service" value="update">
-                        <input type="hidden" name="TeacherID" value="<%= teacher.getTeacherID() %>">
+                        <input type="hidden" name="service" value="addTeacher">
+                        <div class="row mb-3">
+                            <label for="TeacherID" class="col-sm-2 col-form-label">Teacher ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="TeacherID" name="TeacherID" required>
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <label for="UserID" class="col-sm-2 col-form-label">User ID</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="UserID" name="UserID" value="<%= teacher.getUserID() %>" required>
+                                <input type="text" class="form-control" id="UserID" name="UserID" required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="Degree" class="col-sm-2 col-form-label">Degree</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="Degree" name="Degree" value="<%= teacher.getDegree() %>" required>
+                                <input type="text" class="form-control" id="Degree" name="Degree" required>
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" name="submit" value="update" class="btn btn-primary mr-2">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
                         </div>
                     </form><!-- End Horizontal Form -->
-                    <% 
-                        } else {
-                            out.println("<p>No teacher data found.</p>");
-                        }
-                    %>
+
                 </div>
             </div>
         </div>
     </main>
-    
     <%@include file="Footer.jsp"%>
   
   <!-- Vendor JS Files -->

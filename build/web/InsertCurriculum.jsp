@@ -5,8 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.Vector, entity.Teacher"%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,12 +43,12 @@
     <%@include file="HeaderAdmin.jsp"%>
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Update Teacher</h1>
+            <h1>Add New Curriculum</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HomeAdmin.jsp">Home</a></li>
-                    <li class="breadcrumb-item"><a href="TeacherControllerURL?service=listAll">Teachers</a></li>
-                    <li class="breadcrumb-item active">Update Teacher</li>
+                    <li class="breadcrumb-item"><a href="CurriculumControllerURL?service=listAll">Curriculum</a></li>
+                    <li class="breadcrumb-item active">Add Curriculum</li>
                 </ol>
             </nav>
         </div>
@@ -58,38 +56,34 @@
         <div class="container mt-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Edit Information</h5>
+                    <h5 class="card-title">Curriculum Information</h5>
                     
-                    <% 
-                        Vector<Teacher> vector = (Vector<Teacher>) request.getAttribute("vector");
-                        if (vector != null && vector.size() > 0) {
-                            Teacher teacher = vector.get(0);
-                    %>
-                    <!-- Horizontal Form -->
-                    <form action="TeacherControllerURL" method="post">
-                        <input type="hidden" name="service" value="update">
-                        <input type="hidden" name="TeacherID" value="<%= teacher.getTeacherID() %>">
+                    <!-- Add Curriculum Form -->
+                    <form action="CurriculumControllerURL" method="post">
+                        <input type="hidden" name="service" value="addCurriculum">
                         <div class="row mb-3">
-                            <label for="UserID" class="col-sm-2 col-form-label">User ID</label>
+                            <label for="CurID" class="col-sm-2 col-form-label">Curriculum ID</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="UserID" name="UserID" value="<%= teacher.getUserID() %>" required>
+                                <input type="text" class="form-control" id="CurID" name="CurID" required>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="Degree" class="col-sm-2 col-form-label">Degree</label>
+                            <label for="CurName" class="col-sm-2 col-form-label">Curriculum Name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="Degree" name="Degree" value="<%= teacher.getDegree() %>" required>
+                                <input type="text" class="form-control" id="CurName" name="CurName" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="CateID" class="col-sm-2 col-form-label">Category ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="CateID" name="CateID" required>
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" name="submit" value="update" class="btn btn-primary mr-2">Submit</button>
+                            <button type="submit" class="btn btn-primary" >Add Curriculum</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
                         </div>
-                    </form><!-- End Horizontal Form -->
-                    <% 
-                        } else {
-                            out.println("<p>No teacher data found.</p>");
-                        }
-                    %>
+                    </form><!-- End Add Curriculum Form -->
                 </div>
             </div>
         </div>
