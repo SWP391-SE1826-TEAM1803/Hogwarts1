@@ -23,8 +23,8 @@ public class DBConnect {
         }
    }
     public DBConnect() {
-        this("jdbc:sqlserver://localhost:1433;databaseName=hogwartsDB",
-                "sa","12345678");
+        this("jdbc:sqlserver://localhost:1433;databaseName=DB_Project",
+                "sa","123456");
     }
     public ResultSet getData(String sql){
         ResultSet rs=null;
