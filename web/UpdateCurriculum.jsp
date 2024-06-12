@@ -5,8 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="model.DAOCurriculum" %>
-<%@ page import="entity.Curriculum" %>
+<%@page import="java.util.Vector,entity.Curriculum"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,26 +59,24 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Edit Curriculum Information</h5>
-                    
                     <% 
-                        String curID = request.getParameter("CurID");
-                        DAOCurriculum dao = new DAOCurriculum();
-                        Curriculum curriculum = dao.getCurriculumByID(curID);
-                        
-                        if (curriculum != null) {
+                        Vector<Curriculum> vector = (Vector<Curriculum>) request.getAttribute("vector");
+                        if (vector != null && vector.size() > 0) {
+                            Curriculum curriculum = vector.get(0);
                     %>
+                    
                     <!-- Horizontal Form -->
                     <form action="CurriculumControllerURL" method="post">
                         <input type="hidden" name="service" value="update">
                         <input type="hidden" name="CurID" value="<%= curriculum.getCurID() %>">
                         <div class="row mb-3">
-                            <label for="CurName" class="col-sm-2 col-form-label">Tên Chương Trình</label>
+                            <label for="CurName" class="col-sm-2 col-form-label">Curriculum Name</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="CurName" name="CurName" value="<%= curriculum.getCurName() %>" required>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="CateID" class="col-sm-2 col-form-label">Mã Danh Mục</label>
+                            <label for="CateID" class="col-sm-2 col-form-label">Category ID</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="CateID" name="CateID" value="<%= curriculum.getCateID() %>" required>
                             </div>

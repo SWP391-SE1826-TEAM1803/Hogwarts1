@@ -5,16 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="entity.Teacher" %>
-<%@ page import="java.util.Vector" %>
-<%@ page import="model.DAOTeacher" %>
-<%
-    DAOTeacher dao = new DAOTeacher();
-    Vector<Teacher> vector = (Vector<Teacher>) request.getAttribute("data");
-    if (vector == null) {
-        vector = dao.getAllTeachers("select * from Teacher");
-    }
-%>
+<%@ page import="entity.Teacher, model.DAOTeacher" %>
+<%@ page import="java.util.Vector, entity.User, model.DAOUser" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,44 +46,75 @@
 <body>
     <%@include file="HeaderAdmin.jsp"%>
     <main id="main" class="main">
-        <div class="pagetitle">
-            <h1>Teachers List</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="HomeAdmin.jsp">Home</a></li>
-                    <li class="breadcrumb-item active">Teachers</li>
-                </ol>
-            </nav>
-        </div>
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>Teacher ID</th>
-                        <th>User ID</th>
-                        <th>Degree</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% for (Teacher teacher : vector) { %>
-                    <tr>
-                        <td><%= teacher.getTeacherID() %></td>
-                        <td><%= teacher.getUserID() %></td>
-                        <td><%= teacher.getDegree() %></td>
+            <div class="pagetitle">
+                <h1>Teacher List</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="HomeAdmin.jsp">Home</a></li>
+                        <li class="breadcrumb-item active">Teachers</li>
+                    </ol>
+                </nav>
+            </div>
 
-                        <td>
-                            <a href="TeacherControllerURL?service=update&TeacherID=<%= teacher.getTeacherID() %>" class="btn btn-warning">Edit</a>
-                            <a href="#" onclick="confirmDelete('<%= teacher.getTeacherID() %>')" class="btn btn-danger">Delete</a>
-                            <a href="#" class="btn btn-info">Information</a>
-                        </td>
-                        </td>
-                    </tr>
-                    <% } %>
-                </tbody>
-            </table>
-            <a href="addTeacher.jsp" class="btn btn-primary">Add New Teacher</a>
-    </main>
-    
+            <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <form method="get" action="TeacherControllerURL" class="form-inline">
+                                <div class="form-group mb-0 d-inline-flex">
+                                    <select class="form-control mr-2" id="degreeSelect" name="degree">
+                                        <option value="">All Degrees</option>
+                                        <option value="Bachelor">Bachelor</option>
+                                        <option value="Master">Master</option>
+                                        <option value="Doctor">Doctor</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                </div>
+                            </form>
+                            <a href="InsertTeacher.jsp" class="btn btn-success">Add New Teacher</a>
+                        </div>
+                        <!-- Table -->
+                        <table class="table table-borderless datatable mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Teacher ID</th>
+                                    <th scope="col">Teacher Name</th>
+                                    <th scope="col">User ID</th>
+                                    <th scope="col">Degree</th>
+                                    <th scope="col" style="text-align: center;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    DAOUser daoUser = new DAOUser();
+                                    Vector<Teacher> vector = (Vector<Teacher>) request.getAttribute("data");
+                                    if (vector != null) {
+                                        for (Teacher teacher : vector) {
+                                            Vector<User> users = daoUser.getAllUsers("select * from [User] where UserID = '" + teacher.getUserID() + "'");
+                                            String teacherName = users.size() > 0 ? users.get(0).getFullName() : "";
+                                %>
+                                <tr>
+                                    <td><%= teacher.getTeacherID() %></td>
+                                    <td><%= teacherName %></td>
+                                    <td><%= teacher.getUserID() %></td>
+                                    <td><%= teacher.getDegree() %></td>
+                                    <td style="text-align: center;">
+                                        <a class="btn btn-outline-warning btn-icon-text" href="TeacherControllerURL?service=update&TeacherID=<%= teacher.getTeacherID() %>">
+                                            <i class="mdi mdi-refresh"></i> Update
+                                        </a>
+                                        <a class="btn btn-outline-danger btn-icon-text" href="TeacherControllerURL?service=delete&TeacherID=<%= teacher.getTeacherID() %>">
+                                            <i class="mdi mdi-delete-forever"></i> Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                                <% } } %>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </main>
     <%@include file="Footer.jsp"%>
   
   <!-- Vendor JS Files -->
