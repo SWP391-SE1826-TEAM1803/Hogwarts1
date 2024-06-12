@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="model.DAOTeacher, model.DAOStudentSchoolYearClass" %>
+<%@ page import="model.DAOTeacher, model.DAOStudentSchoolYearClass, model.DAOUser, model.DAOClass, model.DAOMenu, model.DAOCurriculum" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,93 +54,141 @@
 <body>
     <%@include file="HeaderAdmin.jsp"%>
   <main id="main" class="main">
-    <div class="pagetitle">
-      <h1>Home</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        </ol>
-      </nav>
+        <div class="pagetitle">
+            <h1>Home</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a>Home</a></li>
+                </ol>
+            </nav>
 
-      <div class="container">
-        <div class="row">
-          <!-- Teacher Card -->
-          <div class="col-xxl-3 col-xl-6 mb-3">
-            <div class="card info-card customers-card">
-              <div class="card-body">
-                <h5 class="card-title">Teachers <span>| This Year</span></h5>
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-pen"></i>
-                  </div>
-                  <div class="ms-3">
-                    <h6 class="mb-0"><%
-                        DAOTeacher dao = new DAOTeacher();
-                        int teacherCount = dao.getTeacherCount();
-                        out.print(teacherCount);
-                      %></h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-4 col-xl-6 mb-3">
+                        <div class="card info-card customers-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Accounts <span>| This Year</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0"><%
+                                            DAOUser daoU = new DAOUser();
+                                            int userCount = daoU.getUserCount();
+                                            out.print(userCount);
+                                        %></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-          <!-- Student Card -->
-          <div class="col-xxl-3 col-xl-6 mb-3">
-            <div class="card info-card customers-card">
-              <div class="card-body">
-                <h5 class="card-title">Students <span>| This Year</span></h5>
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-pen"></i>
-                  </div>
-                  <div class="ms-3">
-                    <h6 class="mb-0"><%
-                        DAOStudentSchoolYearClass daoSt = new DAOStudentSchoolYearClass();
-                        int studentCount = daoSt.getStudentCount();
-                        out.print(studentCount);
-                      %></h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                    <div class="col-xxl-4 col-xl-6 mb-3">
+                        <div class="card info-card customers-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Classes <span>| This Year</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-door-open"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0"><%
+                                            DAOClass daoC = new DAOClass();
+                                            int classCount = daoC.getClassCount();
+                                            out.print(classCount);
+                                        %></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-          <div class="col-xxl-3 col-xl-6 mb-3">
-            <div class="card info-card customers-card">
-              <div class="card-body">
-                <h5 class="card-title">Classes <span>| This Year</span></h5>
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-pen"></i>
-                  </div>
-                  <div class="ms-3">
-                    <h6 class="mb-0">1244</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                    <!-- Teacher Card -->
+                    <div class="col-xxl-4 col-xl-6 mb-3">
+                        <div class="card info-card customers-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Teachers <span>| This Year</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-pen"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0"><%
+                                            DAOTeacher dao = new DAOTeacher();
+                                            int teacherCount = dao.getTeacherCount();
+                                            out.print(teacherCount);
+                                        %></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-          <div class="col-xxl-3 col-xl-6 mb-3">
-            <div class="card info-card customers-card">
-              <div class="card-body">
-                <h5 class="card-title">Curriculum <span>| This Year</span></h5>
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-pen"></i>
-                  </div>
-                  <div class="ms-3">
-                    <h6 class="mb-0">1244</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div><!-- End Row -->
-      </div><!-- End Container -->
-    </div><!-- End Page Title -->
-  </main>
+                    <!-- Student Card -->
+                    <div class="col-xxl-4 col-xl-6 mb-3">
+                        <div class="card info-card customers-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Students <span>| This Year</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-backpack"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0"><%
+                                            DAOStudentSchoolYearClass daoSt = new DAOStudentSchoolYearClass();
+                                            int studentCount = daoSt.getStudentCount();
+                                            out.print(studentCount);
+                                        %></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-4 col-xl-6 mb-3">
+                        <div class="card info-card customers-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Curriculums <span>| This Year</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-book"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0"><%
+                                            DAOCurriculum daoCur = new DAOCurriculum();
+                                            int curCount = daoCur.getCurCount();
+                                            out.print(curCount);
+                                        %></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-4 col-xl-6 mb-3">
+                        <div class="card info-card customers-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Menus <span>| This Year</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-egg"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0"><%
+                                            DAOMenu daoM = new DAOMenu();
+                                            int menuCount = daoM.getMenuCount();
+                                            out.print(menuCount);
+                                        %></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End Row -->
+            </div><!-- End Container -->
+        </div><!-- End Page Title -->
+    </main>
 
   <%@include file="Footer.jsp"%>
   

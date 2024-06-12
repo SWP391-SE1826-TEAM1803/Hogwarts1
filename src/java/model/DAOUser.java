@@ -133,7 +133,7 @@ public class DAOUser extends DBConnect {
     
     public int getUserCount() {
         int count = 0;
-        String sql = "SELECT COUNT(*) FROM User";
+        String sql = "SELECT COUNT(*) FROM [User]";
         try (
              PreparedStatement pre = conn.prepareStatement(sql);
              ResultSet rs = pre.executeQuery()) {

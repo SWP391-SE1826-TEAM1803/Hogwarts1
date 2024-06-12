@@ -281,12 +281,12 @@
 
                 <li class="nav-item">
                     <a class="nav-link " href="HomeAdmin.jsp">
-                        <i class="bi bi-grid"></i>
+                        <i class="bi bi-house"></i>
                         <span>Home</span>
                     </a>
                 </li><!-- End Dashboard Nav -->
 
-                
+
 
                 <li class="nav-heading">Manage</li>
 
@@ -297,21 +297,6 @@
                     </a>
                 </li><!-- End Profile Page Nav -->
 
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="CurriculumControllerURL?service=listAll">
-                        <i class="bi bi-menu-button-wide"></i>
-                        <span>Curriculumes</span>
-                    </a>
-                </li><!-- End Profile Page Nav -->
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="StudentControllerURL?service=listAll">
-                        <i class="bi bi-backpack"></i>
-                        <span>Students</span>
-                    </a>
-                </li>
-                
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="SchoolYearControllerURL?service=listAll">
                         <i class="bi bi-calendar"></i>
@@ -320,12 +305,39 @@
                 </li><!-- End Profile Page Nav --><!-- End Profile Page Nav -->
 
                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="ClassControllerURL?service=listAll">
+                        <i class="bi bi-door-open"></i>
+                        <span>Classes</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link collapsed" href="TeacherControllerURL?service=listAll">
                         <i class="bi bi-pen"></i>
                         <span>Teachers</span>
                     </a>
                 </li>
-                
+
+
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="StudentControllerURL?service=listAll">
+                        <i class="bi bi-backpack"></i>
+                        <span>Students</span>
+                    </a>
+                </li>
+
+
+
+
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="CurriculumControllerURL?service=listAll">
+                        <i class="bi bi-book"></i>
+                        <span>Curriculumes</span>
+                    </a>
+                </li><!-- End Profile Page Nav -->
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="MenuControllerURL?service=listAll">
                         <i class="bi bi-egg"></i>

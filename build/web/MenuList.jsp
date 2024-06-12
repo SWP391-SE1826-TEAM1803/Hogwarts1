@@ -72,7 +72,7 @@
                                             <button type="submit" class="btn btn-primary">Filter</button>
                                         </div>
                                     </form>
-                                    <a href="InsertMenu.jsp" class="btn btn-success">Add New Menu Item</a>
+                                    <a href="InsertMenu.jsp" class="btn btn-success">Add New Menu</a>
                                 </div>
 
                                 <table class="table table-borderless datatable mt-3">
