@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="entity.Student" %>
+<%@ page import="java.util.Vector" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,14 +46,18 @@
     <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>Home</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item">Home</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
+    
+        <div class="student-info">
+            <p>Xin chào <%= student.getFullName() %></p>
+            
+        </div>
     </main>
     
     <%@include file="Footer.jsp"%>

@@ -5,8 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="entity.Curriculum" %>
+<%@ page import="model.DAOTeacher, model.DAOStudentSchoolYearClass, model.DAOUser, model.DAOClass, model.DAOMenu, model.DAOCurriculum" %>
+<%@ page import="entity.CurriculumDate" %>
 <%@ page import="java.util.Vector" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,19 +39,29 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+      .card-icon {
+  width: 50px;
+  height: 50px;
+  background-color: #f0f0f0; /* or any preferred background color */
+  font-size: 24px;
+  color: #000; /* or any preferred icon color */
+}
+
+  </style>
 
   
 </head>
 
 <body>
     <%@include file="HeaderAdmin.jsp"%>
-    <main id="main" class="main">
+  <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Curriculum List</h1>
+            <h1>Curriculum Dates List</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HomeAdmin.jsp">Home</a></li>
-                    <li class="breadcrumb-item active">Curriculum</li>
+                    <li class="breadcrumb-item active">Curriculum Dates</li>
                 </ol>
             </nav>
         </div>
@@ -59,48 +71,50 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+
                             <div class="d-flex justify-content-between align-items-center">
-                                <form class="form-inline" action="CurriculumControllerURL" method="get">
+                                <form class="form-inline" action="CurriculumDateControllerURL" method="get">
                                     <div class="input-group">
-                                        <select class="form-control mr-2" name="category">
+                                        <select class="form-control mr-2" name="CurID">
                                             <option value="">All</option>
-                                            <!-- Populate categories -->
+                                            
+                                            <!-- Add more curriculum IDs as needed -->
                                         </select>
                                         <button type="submit" class="btn btn-primary">Filter</button>
                                     </div>
                                 </form>
-                                <a href="InsertCurriculum.jsp" class="btn btn-success">Add New Curriculum</a>
+                                <a href="InsertCurDate.jsp" class="btn btn-success">Add New Curriculum Date</a>
                             </div>
 
                             <table class="table table-borderless datatable mt-3">
                                 <thead>
                                     <tr>
+                                        <th scope="col">Curriculum Date ID</th>
+                                        <th scope="col">Date Number</th>
                                         <th scope="col">Curriculum ID</th>
-                                        <th scope="col">Curriculum Name</th>
-                                        <th scope="col">Category ID</th>
                                         <th scope="col" style="text-align: center;">Detail</th>
                                         <th scope="col" style="text-align: center;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <%
-                                      Vector<Curriculum> curriculums = (Vector<Curriculum>) request.getAttribute("data");
-                                      if (curriculums != null) {
-                                        for (Curriculum curriculum : curriculums) {
+                                      Vector<CurriculumDate> dates = (Vector<CurriculumDate>) request.getAttribute("data");
+                                      if (dates != null) {
+                                        for (CurriculumDate date : dates) {
                                     %>
                                     <tr>
-                                        <td><%= curriculum.getCurID() %></td>
-                                        <td><%= curriculum.getCurName() %></td>
-                                        <td><%= curriculum.getCateID() %></td>
-                                       <td style="text-align: center;">
-                                    <a class="btn btn-outline-info btn-icon-text" href="CurriculumDateControllerURL?service=searchByCurID&CurID=<%= curriculum.getCurID() %>">
+                                        <td><%= date.getCurDateID() %></td>
+                                        <td><%= date.getDateNumber() %></td>
+                                        <td><%= date.getCurID() %></td>
+                                        <td style="text-align: center;">
+                                    <a class="btn btn-outline-info btn-icon-text" href="CurDateActControllerURL?service=searchByCurDateID&CurDateID=<%= date.getCurDateID() %>">
                                         <i class="mdi mdi-information"></i> Detail
                                     </a>
                                     
                                 </td>
                                         <td style="text-align: center;">
-                                            <a class="btn btn-outline-warning btn-sm" href="CurriculumControllerURL?service=update&CurID=<%= curriculum.getCurID() %>">Update</a>
-                                            <a class="btn btn-outline-danger btn-sm" href="CurriculumControllerURL?service=delete&CurID=<%= curriculum.getCurID() %>">Delete</a>
+                                            <a class="btn btn-outline-warning btn-sm" href="CurriculumDateControllerURL?service=update&CurDateID=<%= date.getCurDateID() %>">Update</a>
+                                            <a class="btn btn-outline-danger btn-sm" href="CurriculumDateControllerURL?service=delete&CurDateID=<%= date.getCurDateID() %>">Delete</a>
                                         </td>
                                     </tr>
                                     <%
@@ -115,8 +129,7 @@
             </div>
         </section>
     </main>
-    
-    <%@include file="Footer.jsp"%>
+  <%@include file="Footer.jsp"%>
   
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

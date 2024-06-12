@@ -37,31 +37,73 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+<style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card-custom {
+      width: 300px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .card-custom .icon {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .card-custom .icon i {
+      font-size: 20px;
+      margin-right: 8px;
+    }
+    .card-custom .course-id {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .card-custom .details {
+      margin-bottom: 8px;
+    }
+    .card-custom .details i {
+      margin-right: 4px;
+    }
+    .card-custom .link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
   
 </head>
 
 <body>
-    <%@include file="HeaderParents.jsp"%>
-    <main id="main" class="main">
-
-    <div class="pagetitle">
-      <h1>Home</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-    
-        <div class="student-info">
-            <p>Xin chào <%= student.getFullName() %></p>
             
+<div class="d-flex flex-wrap justify-content-center">
+      <%
+        Vector<Student> students = (Vector<Student>) request.getAttribute("data");
+        if (students != null) {
+          for (Student student : students) { 
+      %>
+        <div class="card-custom">
+          <div class="course-id"><%= student.getStudentID() %></div>
+          <div class="icon"><i class="bi bi-people"></i><%= student.getFullName() %></div>
+          <div class="link">
+            <form action="StudentControllerURL" method="get">
+              <input type="hidden" name="service" value="showPage">
+              <input type="hidden" name="sID" value="<%= student.getStudentID() %>">
+              <button type="submit" class="btn btn-primary">Choose</button>
+            </form>
+          </div>
         </div>
-    </main>
-    
-    <%@include file="Footer.jsp"%>
-  
+      <%
+          }
+        }
+      %>
+    </div>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

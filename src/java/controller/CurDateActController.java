@@ -79,6 +79,14 @@ public class CurDateActController extends HttpServlet {
             dao.deleteCurDateAct(cdtID);
             response.sendRedirect("CurDateActControllerURL?service=listAll");
         }
+        
+        if (service.equals("searchByCurDateID")) {
+            String curDateID = request.getParameter("CurDateID");
+            Vector<CurDateAct> vector = dao.getAllCurDateActs("SELECT * FROM CurDateAct where CurDateID='"+curDateID+"'");
+            request.setAttribute("data", vector);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("CurDateActList.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     @Override

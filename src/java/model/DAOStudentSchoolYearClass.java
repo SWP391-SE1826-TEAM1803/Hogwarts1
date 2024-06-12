@@ -85,6 +85,24 @@ public class DAOStudentSchoolYearClass extends DBConnect {
         return ssClass;
     }
     
+    public Vector<String> searchSyCIDByStudentID(String sID) {
+        Vector<String> sycIDs = new Vector<>();
+        String sql = "SELECT SyC_ID FROM Student_SchoolYear_Class WHERE StudentID = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, sID);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                sycIDs.add(rs.getString("SyC_ID"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOStudentSchoolYearClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sycIDs;
+    }
+    
+    
+    
     public int getStudentCount() {
         int count = 0;
         String sql = "SELECT COUNT(*) FROM Student_SchoolYear_Class where SyC_ID LIKE '%SY3%'";

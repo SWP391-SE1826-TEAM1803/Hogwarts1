@@ -1,6 +1,7 @@
 package controller;
 
 import entity.Student;
+import entity.StudentSchoolYearClass;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.Vector;
 import model.DAOStudent;
+import model.DAOStudentSchoolYearClass;
 
 @WebServlet(name = "StudentController", urlPatterns = {"/StudentControllerURL"})
 public class StudentController extends HttpServlet {
@@ -21,7 +23,16 @@ public class StudentController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         DAOStudent dao = new DAOStudent();
+        DAOStudentSchoolYearClass daoSSYC = new DAOStudentSchoolYearClass();
         HttpSession session = request.getSession(true);
+        
+        // Check if userName is in session
+        String userName = (String) session.getAttribute("userName");
+        if (userName == null) {
+            response.sendRedirect("Login.jsp"); // Redirect to login page if user is not logged in
+            return;
+        }
+             
         
         String service = request.getParameter("service");
         if (service == null) {
@@ -84,7 +95,61 @@ public class StudentController extends HttpServlet {
             dao.removeStudent(studentID);
             response.sendRedirect("StudentControllerURL?service=listAll");
         }
+        
+        if (service.equals("listKids")) {
+        Vector<Student> vector;
+        
+        
+            vector = dao.getAllStudents("SELECT * FROM [Student] WHERE UserID = '" + userName + "'");
+        
+
+        request.setAttribute("data", vector);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("KidsList.jsp");
+        dispatcher.forward(request, response);
+        }
+        
+        if (service.equals("showPage")) {
+            String sID = request.getParameter("sID");
+        Vector<Student> vector;
+        
+        
+            vector = dao.getAllStudents("SELECT * FROM [Student] WHERE StudentID = '" + sID + "'");
+            request.setAttribute("data", vector);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("HomeParents.jsp");
+        dispatcher.forward(request, response);
+        }
+        
+        if (service.equals("viewProfile")) {
+            String sID = request.getParameter("sID");
+        Vector<Student> vector;
+        
+        
+            vector = dao.getAllStudents("SELECT * FROM [Student] WHERE StudentID = '" + sID + "'");
+            request.setAttribute("data", vector);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ViewStudentProfile.jsp");
+        dispatcher.forward(request, response);
+        }
+        
+        if (service.equals("viewStudentClass")) {
+            String sID = request.getParameter("sID");
+
+            // Get all student school year classes
+            Vector<StudentSchoolYearClass> vector = daoSSYC.getAllStudentSchoolYearClasses("SELECT *\n"
+                    + "FROM [hogwartsDB].[dbo].[Student_SchoolYear_Class]\n"
+                    + "WHERE [SyC_ID] = (\n"
+                    + "    SELECT [SyC_ID]\n"
+                    + "    FROM [hogwartsDB].[dbo].[Student_SchoolYear_Class]\n"
+                    + "    WHERE [StudentID] = '" +sID +"'\n"
+                    + ")\n"
+                    + "AND [StudentID] <> '"+sID+"';");
+            // Set data to request
+            request.setAttribute("datas", vector);
+            // Forward to JSP
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ViewStudentClass.jsp");
+            dispatcher.forward(request, response);
+        }
     }
+    
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

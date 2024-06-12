@@ -34,7 +34,8 @@ public class LoginController extends HttpServlet {
                         response.sendRedirect("HomeAdmin.jsp");
                         break;
                     case "Parent":
-                        response.sendRedirect("HomeParents.jsp");
+                        
+                        response.sendRedirect("StudentControllerURL?service=listKids");
                         break;
                     case "Teacher":
                         response.sendRedirect("HomeTeacher.jsp");

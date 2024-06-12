@@ -21,7 +21,7 @@ public class StudentSYearClassController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         DAOStudentSchoolYearClass dao = new DAOStudentSchoolYearClass();
         HttpSession session = request.getSession(true);
-        
+
         String service = request.getParameter("service");
         if (service == null) {
             service = "listAll";
@@ -75,6 +75,9 @@ public class StudentSYearClassController extends HttpServlet {
             dao.deleteStudentSchoolYearClass(studentID, syC_ID);
             response.sendRedirect("StudentSchoolYearClassControllerURL?service=listAll");
         }
+
+        
+
     }
 
     @Override

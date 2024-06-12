@@ -38,7 +38,7 @@ public class CurriculumDateController extends HttpServlet {
         if (service.equals("listAll")) {
             Vector<CurriculumDate> vector = dao.getAllCurriculumDates("SELECT * FROM CurriculumDate");
             request.setAttribute("data", vector);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("CurriculumDateList.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("CurriculumDateManager.jsp");
             dispatcher.forward(request, response);
         }
 
@@ -63,6 +63,14 @@ public class CurriculumDateController extends HttpServlet {
             String curDateID = request.getParameter("CurDateID");
             dao.removeCurriculumDate(curDateID);
             response.sendRedirect("CurriculumDateControllerURL?service=listAll");
+        }
+        
+        if (service.equals("searchByCurID")) {
+            String curID = request.getParameter("CurID");
+            Vector<CurriculumDate> vector = dao.getAllCurriculumDates("SELECT * FROM CurriculumDate where CurID='"+curID+"'");
+            request.setAttribute("data", vector);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("CurriculumDateList.jsp");
+            dispatcher.forward(request, response);
         }
     }
 

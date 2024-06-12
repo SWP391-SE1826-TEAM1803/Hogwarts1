@@ -92,9 +92,12 @@
                                         <td><%= curriculum.getCurID() %></td>
                                         <td><%= curriculum.getCurName() %></td>
                                         <td><%= curriculum.getCateID() %></td>
-                                        <td style="text-align: center;">
-                                            
-                                        </td>
+                                       <td style="text-align: center;">
+                                    <a class="btn btn-outline-info btn-icon-text" href="CurriculumDateControllerURL?service=searchByCurID&CurID=<%= curriculum.getCurID() %>">
+                                        <i class="mdi mdi-information"></i> Detail
+                                    </a>
+                                    
+                                </td>
                                         <td style="text-align: center;">
                                             <a class="btn btn-outline-warning btn-sm" href="CurriculumControllerURL?service=update&CurID=<%= curriculum.getCurID() %>">Update</a>
                                             <a class="btn btn-outline-danger btn-sm" href="CurriculumControllerURL?service=delete&CurID=<%= curriculum.getCurID() %>">Delete</a>

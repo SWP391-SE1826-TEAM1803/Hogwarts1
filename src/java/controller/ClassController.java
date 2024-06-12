@@ -38,7 +38,7 @@ public class ClassController extends HttpServlet {
         if (service.equals("listAll")) {
             Vector<Class> vector = dao.getAllClasses("SELECT * FROM Class");
             request.setAttribute("data", vector);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("ClassList.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ClassManager.jsp");
             dispatcher.forward(request, response);
         }
         
