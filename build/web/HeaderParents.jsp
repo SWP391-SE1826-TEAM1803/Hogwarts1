@@ -42,13 +42,11 @@
 
 <body>
     <% 
-    try {
         Vector<Student> students = (Vector<Student>) request.getAttribute("data");
+        Student student = null;
+            student = students.get(0);
         
-        Student student = students.get(0); // This line may throw an exception if 'students' is null or empty
-        // Your existing code that uses 'student' goes here
-        %>
-    
+    %>
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -340,12 +338,6 @@
             </ul>
 
         </aside><!-- End Sidebar-->
-        <%} catch (Exception e) {
-        // Handle the exception gracefully
-        out.println("An error occurred while processing student data.");
-        // Optionally, you can log the exception or display more user-friendly information
-    }
-%>
 
   
 
