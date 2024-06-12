@@ -41,6 +41,30 @@ public class ClassController extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("ClassList.jsp");
             dispatcher.forward(request, response);
         }
+        
+        if (service.equals("update")) {
+            String submit = request.getParameter("submit");
+            if (submit == null) {
+                String classID = request.getParameter("ClassID");
+                Vector<Class> vector = dao.getAllClasses("SELECT * FROM Class WHERE ClassID='" + classID + "'");
+                request.setAttribute("vector", vector);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("UpdateClass.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                String classID = request.getParameter("ClassID");
+                String className = request.getParameter("ClassName");
+                String cateID = request.getParameter("CateID");
+                Class classObj = new Class(classID, className, cateID);
+                dao.updateClass(classObj);
+                response.sendRedirect("ClassControllerURL?service=listAll");
+            }
+        }
+
+        if (service.equals("delete")) {
+            String classID = request.getParameter("ClassID");
+            dao.removeClass(classID);
+            response.sendRedirect("ClassControllerURL?service=listAll");
+        }
 
         // Add other CRUD operations as needed
     }
