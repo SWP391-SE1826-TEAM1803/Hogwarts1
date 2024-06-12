@@ -1,5 +1,6 @@
 package model;
 
+import com.sun.jdi.connect.spi.Connection;
 import entity.Teacher;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
@@ -80,6 +81,23 @@ public class DAOTeacher extends DBConnect {
         }
         return vector;
     }
+    
+    
+public int getTeacherCount() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM Teacher";
+        try (
+             PreparedStatement pre = conn.prepareStatement(sql);
+             ResultSet rs = pre.executeQuery()) {
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+
 
     public static void main(String[] args) {
         DAOTeacher dao = new DAOTeacher();

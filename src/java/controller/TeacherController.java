@@ -28,7 +28,6 @@ public class TeacherController extends HttpServlet {
         }
 
         if (service.equals("addTeacher")) {
-            System.out.println("Entering addTeacher block...");
             String teacherID = request.getParameter("TeacherID");
             String userID = request.getParameter("UserID");
             String degree = request.getParameter("Degree");
@@ -40,6 +39,7 @@ public class TeacherController extends HttpServlet {
         if (service.equals("listAll")) {
             Vector<Teacher> vector = dao.getAllTeachers("SELECT * FROM Teacher");
             request.setAttribute("data", vector);
+            request.setAttribute("teacherCount", vector.size()); // Setting teacher count attribute
             RequestDispatcher dispatcher = request.getRequestDispatcher("TeacherManager.jsp");
             dispatcher.forward(request, response);
         }
@@ -67,6 +67,7 @@ public class TeacherController extends HttpServlet {
             dao.removeTeacher(teacherID);
             response.sendRedirect("TeacherControllerURL?service=listAll");
         }
+        
     }
 
     @Override

@@ -84,4 +84,19 @@ public class DAOStudentSchoolYearClass extends DBConnect {
         }
         return ssClass;
     }
+    
+    public int getStudentCount() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM Student_SchoolYear_Class where SyC_ID LIKE '%SY3%'";
+        try (
+             PreparedStatement pre = conn.prepareStatement(sql);
+             ResultSet rs = pre.executeQuery()) {
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
 }

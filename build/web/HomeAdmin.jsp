@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="model.DAOTeacher, model.DAOStudentSchoolYearClass" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,25 +37,112 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+      .card-icon {
+  width: 50px;
+  height: 50px;
+  background-color: #f0f0f0; /* or any preferred background color */
+  font-size: 24px;
+  color: #000; /* or any preferred icon color */
+}
+
+  </style>
 
   
 </head>
 
 <body>
     <%@include file="HeaderAdmin.jsp"%>
-    <main id="main" class="main">
-
+  <main id="main" class="main">
     <div class="pagetitle">
-      <h1>Trang chủ</h1>
+      <h1>Home</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
         </ol>
       </nav>
+
+      <div class="container">
+        <div class="row">
+          <!-- Teacher Card -->
+          <div class="col-xxl-3 col-xl-6 mb-3">
+            <div class="card info-card customers-card">
+              <div class="card-body">
+                <h5 class="card-title">Teachers <span>| This Year</span></h5>
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-pen"></i>
+                  </div>
+                  <div class="ms-3">
+                    <h6 class="mb-0"><%
+                        DAOTeacher dao = new DAOTeacher();
+                        int teacherCount = dao.getTeacherCount();
+                        out.print(teacherCount);
+                      %></h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Student Card -->
+          <div class="col-xxl-3 col-xl-6 mb-3">
+            <div class="card info-card customers-card">
+              <div class="card-body">
+                <h5 class="card-title">Students <span>| This Year</span></h5>
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-pen"></i>
+                  </div>
+                  <div class="ms-3">
+                    <h6 class="mb-0"><%
+                        DAOStudentSchoolYearClass daoSt = new DAOStudentSchoolYearClass();
+                        int studentCount = daoSt.getStudentCount();
+                        out.print(studentCount);
+                      %></h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xxl-3 col-xl-6 mb-3">
+            <div class="card info-card customers-card">
+              <div class="card-body">
+                <h5 class="card-title">Classes <span>| This Year</span></h5>
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-pen"></i>
+                  </div>
+                  <div class="ms-3">
+                    <h6 class="mb-0">1244</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xxl-3 col-xl-6 mb-3">
+            <div class="card info-card customers-card">
+              <div class="card-body">
+                <h5 class="card-title">Curriculum <span>| This Year</span></h5>
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-pen"></i>
+                  </div>
+                  <div class="ms-3">
+                    <h6 class="mb-0">1244</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- End Row -->
+      </div><!-- End Container -->
     </div><!-- End Page Title -->
-    </main>
-    
-    <%@include file="Footer.jsp"%>
+  </main>
+
+  <%@include file="Footer.jsp"%>
   
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
