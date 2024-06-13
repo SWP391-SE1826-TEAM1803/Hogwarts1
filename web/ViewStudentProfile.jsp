@@ -43,16 +43,23 @@
 
 <body>
     <%@include file="HeaderParents.jsp"%>
+    <%
+                                          Vector<Student> students = (Vector<Student>) request.getAttribute("data");
+                                          Student student = null;
+            student = students.get(0);
+                                        %>
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>Student Profile</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="StudentControllerURL?service=showPage&sID=<%= student.getStudentID() %>">Home</a></li>
+                    <li class="breadcrumb-item"><a href="StudentControllerURL?service=showPage&sID=<%= StudentID %>">Home</a></li>
                     <li class="breadcrumb-item active">Profile</li>
                 </ol>
             </nav>
         </div>
+                    
+                   
 
         <section class="section profile">
             <div class="row">
@@ -63,7 +70,7 @@
                             
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 label">Student ID:</div>
-                                <div class="col-lg-8 col-md-6"><%= student.getStudentID() %></div>
+                                <div class="col-lg-8 col-md-6"><%= StudentID %></div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 label">Full Name:</div>

@@ -110,6 +110,7 @@ public class StudentController extends HttpServlet {
         
         if (service.equals("showPage")) {
             String sID = request.getParameter("sID");
+            session.setAttribute("sID", sID);
         Vector<Student> vector;
         
         
@@ -132,11 +133,12 @@ public class StudentController extends HttpServlet {
         
         if (service.equals("viewStudentClass")) {
             String sID = request.getParameter("sID");
+            
 
             // Get all student school year classes
             Vector<StudentSchoolYearClass> vector = daoSSYC.getAllStudentSchoolYearClasses("SELECT * FROM [Student_SchoolYear_Class]WHERE [SyC_ID] = (SELECT [SyC_ID] FROM [hogwartsDB].[dbo].[Student_SchoolYear_Class] WHERE [StudentID] = '" +sID+"');");
             // Set data to request
-            request.setAttribute("datas", vector);
+            request.setAttribute("data", vector);
             // Forward to JSP
             RequestDispatcher dispatcher = request.getRequestDispatcher("ViewStudentClass.jsp");
             dispatcher.forward(request, response);

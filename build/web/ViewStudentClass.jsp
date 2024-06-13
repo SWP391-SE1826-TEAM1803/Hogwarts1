@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="entity.StudentSchoolYearClass"%>
-<%@ page import="entity.Student" %>
+<%@ page import="entity.Student, model.DAOStudent" %>
 <%@ page import="java.util.Vector" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +43,8 @@
 </head>
 
 <body>
+        <%@include file="HeaderParents.jsp"%>
+
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>Student Class List</h1>
@@ -64,17 +66,24 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Student ID</th>
+                                        <th scope="col">Student ID</th>
+                                        
                                         <th scope="col">School Year Class ID</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <% 
-                                        Vector<StudentSchoolYearClass> studentsClass = (Vector<StudentSchoolYearClass>) request.getAttribute("datas");
+                                        DAOStudent dao = new DAOStudent();
+                                        Vector<StudentSchoolYearClass> studentsClass = (Vector<StudentSchoolYearClass>) request.getAttribute("data");
                                         if (studentsClass != null) {
                                             for (StudentSchoolYearClass studentc : studentsClass) {
+                                                                            Vector<Student> studentObj = dao.getAllStudents("SELECT * FROM [Student] WHERE StudentID = '" + 
+                                                                            studentc.getStudentID() + "'");
+
                                     %>
                                     <tr>
                                         <td><%= studentc.getStudentID() %></td>
+                                        <td><%=studentObj.getFullName()%></td>
                                         <td><%= studentc.getSyC_ID() %></td>
                                     </tr>
                                     <% 

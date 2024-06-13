@@ -42,7 +42,13 @@
 </head>
 
 <body>
+    
     <%@include file="HeaderParents.jsp"%>
+    <%
+                                          Vector<Student> students = (Vector<Student>) request.getAttribute("data");
+                                          Student student = null;
+            student = students.get(0);
+                                        %>
     <main id="main" class="main">
 
     <div class="pagetitle">
@@ -55,7 +61,7 @@
     </div><!-- End Page Title -->
     
         <div class="student-info">
-            <p>Xin chào <%= student.getFullName() %></p>
+            <h5>Xin chào <%=student.getFullName()%></h5>
             
         </div>
     </main>

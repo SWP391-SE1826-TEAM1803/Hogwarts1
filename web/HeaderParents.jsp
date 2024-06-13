@@ -41,12 +41,7 @@
 </head>
 
 <body>
-    <% 
-        Vector<Student> students = (Vector<Student>) request.getAttribute("data");
-        Student student = null;
-            student = students.get(0);
-        
-    %>
+    
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -219,7 +214,10 @@
         <%
                             // Assuming the username is stored in a session attribute called "username"
                             String username = (String)session.getAttribute("userName");
+                                                        String StudentID = (String)session.getAttribute("sID");
+
         %>
+         
 
         <li class="nav-item dropdown pe-3">
 
@@ -288,7 +286,7 @@
             <ul class="sidebar-nav" id="sidebar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link " href="StudentControllerURL?service=showPage&sID=<%= student.getStudentID() %>">
+                    <a class="nav-link " href="StudentControllerURL?service=showPage&sID=<%= StudentID %>">
                         <i class="bi bi-house"></i>
                         <span>Home</span>
                     </a>
@@ -299,7 +297,7 @@
                 <li class="nav-heading">View</li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="StudentControllerURL?service=viewProfile&sID=<%= student.getStudentID() %>">
+                    <a class="nav-link collapsed" href="StudentControllerURL?service=viewProfile&sID=<%= StudentID %>">
                         <i class="bi bi-person"></i>
                         <span>Profile</span>
                     </a>
@@ -308,7 +306,7 @@
                 
                 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="StudentControllerURL?service=viewStudentClass&sID=<%= student.getStudentID() %>">
+                    <a class="nav-link collapsed" href="StudentControllerURL?service=viewStudentClass&sID=<%=StudentID %>">
                         <i class="bi bi-door-open"></i>
                         <span>Classes</span>
                     </a>
@@ -337,7 +335,7 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="FeedbackControllerURL?service=viewFeedBack&sID=<%= student.getStudentID() %>">
+                    <a class="nav-link collapsed" href="FeedbackControllerURL?service=viewFeedBack&sID=<%=StudentID%>">
                         <i class="bi bi-chat-left-dots"></i>
                         <span>Feedback</span>
                     </a>
