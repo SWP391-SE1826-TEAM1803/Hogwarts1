@@ -335,6 +335,13 @@
                         <span>Menus</span>
                     </a>
                 </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="FeedbackControllerURL?service=viewFeedBack&sID=<%= student.getStudentID() %>">
+                        <i class="bi bi-chat-left-dots"></i>
+                        <span>Feedback</span>
+                    </a>
+                </li>
             </ul>
 
         </aside><!-- End Sidebar-->

@@ -70,6 +70,14 @@ public class FeedbackController extends HttpServlet {
             dao.removeFeedback(feedbackID);
             response.sendRedirect("FeedbackControllerURL?service=listAll");
         }
+        if (service.equals("viewFeedBack")) {
+                        String sID = request.getParameter("sID");
+
+            Vector<Feedback> vector = dao.getAllFeedbacks("SELECT * FROM Feedback where StudentID ='"+sID+"'" );
+            request.setAttribute("dataf", vector);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("FeedbackList.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     @Override

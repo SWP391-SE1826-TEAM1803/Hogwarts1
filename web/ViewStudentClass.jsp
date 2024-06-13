@@ -43,7 +43,6 @@
 </head>
 
 <body>
-    <%@include file="HeaderParents.jsp"%>
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>Student Class List</h1>
