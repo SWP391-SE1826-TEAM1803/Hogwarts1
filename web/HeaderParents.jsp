@@ -321,7 +321,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="TeacherControllerURL?service=listAll">
+                    <a class="nav-link collapsed" href="TeacherControllerURL?service=viewTeacher&sID=<%=StudentID%>">
                         <i class="bi bi-pen"></i>
                         <span>Teachers</span>
                     </a>

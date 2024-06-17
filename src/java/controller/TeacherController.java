@@ -1,6 +1,8 @@
 package controller;
 
+import entity.StudentSchoolYearClass;
 import entity.Teacher;
+import entity.TeacherSchoolYearClass;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,7 +13,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.Vector;
+import model.DAOStudentSchoolYearClass;
 import model.DAOTeacher;
+import model.DAOTeacherSchoolYearClass;
 
 @WebServlet(name = "TeacherController", urlPatterns = {"/TeacherControllerURL"})
 public class TeacherController extends HttpServlet {
@@ -71,7 +75,23 @@ public class TeacherController extends HttpServlet {
             response.sendRedirect("TeacherControllerURL?service=listAll");
         }
         
-        
+        if (service.equals("viewTeacher")) {
+            DAOStudentSchoolYearClass daoSSC = new DAOStudentSchoolYearClass();
+            DAOTeacherSchoolYearClass daoTSC = new DAOTeacherSchoolYearClass();
+
+            String sID = request.getParameter("sID");
+            Vector<StudentSchoolYearClass> vectorSSC = daoSSC.getAllStudentSchoolYearClasses("select * from Student_SchoolYear_Class where StudentID = '" + sID + "'");
+//            Vector<SchoolYearClass> vectorSC = daoSC.getAllSchoolYearClasses("select * from SchoolYear_Class where SyC_ID = ' "+sID+"'");
+             StudentSchoolYearClass SSyClass = vectorSSC.get(0);
+
+
+            Vector<TeacherSchoolYearClass> vectorTSC = daoTSC.getAllTeacherSchoolYearClasses("select * from Teacher_SchoolYear_Class where SyC_ID = '"+SSyClass.getSyC_ID()+"'");
+              Vector<Teacher> vector = dao.getAllTeachers("select * from Teacher where TeacherID = '"+vectorTSC.get(0).getTeacherID()+"'");
+          
+            request.setAttribute("data", vector);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ViewTeacher.jsp");
+            dispatcher.forward(request, response);
+        }
         
     }
 

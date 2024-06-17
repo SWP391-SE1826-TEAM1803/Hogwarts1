@@ -76,21 +76,7 @@ public class MenuController extends HttpServlet {
             response.sendRedirect("MenuControllerURL?service=listAll");
         }
         
-        if (service.equals("viewTeacher")) {
-            DAOStudentSchoolYearClass daoSSC = new DAOStudentSchoolYearClass();
-            DAOTeacherSchoolYearClass daoTSC = new DAOTeacherSchoolYearClass();
-
-            String sID = request.getParameter("sID");
-            Vector<StudentSchoolYearClass> vectorSSC = daoSSC.getAllStudentSchoolYearClasses("select * from Student_SchoolYear_Class where StudentID = '" + sID + "'");
-//            Vector<SchoolYearClass> vectorSC = daoSC.getAllSchoolYearClasses("select * from SchoolYear_Class where SyC_ID = ' "+sID+"'");
-             StudentSchoolYearClass SSyClass = vectorSSC.get(0);
-
-
-            Vector<TeacherSchoolYearClass> vector = daoTSC.getAllTeacherSchoolYearClasses("select * from TeacherSchoolYearClass where SyC_ID = '"+SSyClass.getSyC_ID()+"'");
-            request.setAttribute("data", vector);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("ViewTeacher.jsp");
-            dispatcher.forward(request, response);
-        }
+        
         
         if (service.equals("viewMenu")) {
             DAOStudentSchoolYearClass daoSSC = new DAOStudentSchoolYearClass();
