@@ -7,6 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="entity.Student" %>
 <%@ page import="java.util.Vector" %>
+<%    
+    String sID = (String) session.getAttribute("sID");
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +41,13 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  
+  <script>
+        function showUpdateForm() {
+            document.getElementById('studentDetails').style.display = 'none';
+            document.getElementById('updateForm').style.display = 'block';
+        }
+    </script>
 
   
 </head>
@@ -44,22 +55,19 @@
 <body>
     <%@include file="HeaderParents.jsp"%>
     <%
-                                          Vector<Student> students = (Vector<Student>) request.getAttribute("data");
-                                          Student student = null;
-            student = students.get(0);
-                                        %>
+        Vector<Student> students = (Vector<Student>) request.getAttribute("data");
+        Student student = students != null && !students.isEmpty() ? students.get(0) : null;
+    %>
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>Student Profile</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="StudentControllerURL?service=showPage&sID=<%= StudentID %>">Home</a></li>
+                    <li class="breadcrumb-item"><a href="StudentControllerURL?service=showPage&sID=<%= student != null ? student.getStudentID() : "" %>">Home</a></li>
                     <li class="breadcrumb-item active">Profile</li>
                 </ol>
             </nav>
         </div>
-                    
-                   
 
         <section class="section profile">
             <div class="row">
@@ -68,36 +76,87 @@
                         <div class="card-body">
                             <h5 class="card-title">Student Details</h5>
                             
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 label">Student ID:</div>
-                                <div class="col-lg-8 col-md-6"><%= StudentID %></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 label">Full Name:</div>
-                                <div class="col-lg-8 col-md-6"><%= student.getFullName() %></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 label">Date of Birth:</div>
-                                <div class="col-lg-8 col-md-6"><%= student.getDob() %></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 label">Age:</div>
-                                <div class="col-lg-8 col-md-6"><%= student.getAge() %></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 label">Gender:</div>
-                                <div class="col-lg-8 col-md-6"><%= student.getGender() %></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 label">Address:</div>
-                                <div class="col-lg-8 col-md-6"><%= student.getAddress() %></div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-lg-12 text-center mt-4">
-                                    <a href="StudentControllerURL?service=update&StudentID=<%= student.getStudentID() %>" class="btn btn-warning">Update</a>
-                                    <a href="StudentControllerURL?service=delete&StudentID=<%= student.getStudentID() %>" class="btn btn-danger">Delete</a>
+                            <!-- Student Details -->
+                            <div id="studentDetails" style="display: block;">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 label">Student ID:</div>
+                                    <div class="col-lg-8 col-md-6"><%= student != null ? student.getStudentID() : "" %></div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 label">Full Name:</div>
+                                    <div class="col-lg-8 col-md-6"><%= student != null ? student.getFullName() : "" %></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 label">Date of Birth:</div>
+                                    <div class="col-lg-8 col-md-6"><%= student != null ? student.getDob() : "" %></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 label">Age:</div>
+                                    <div class="col-lg-8 col-md-6"><%= student != null ? student.getAge() : "" %></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 label">Gender:</div>
+                                    <div class="col-lg-8 col-md-6"><%= student != null ? student.getGender() : "" %></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 label">Address:</div>
+                                    <div class="col-lg-8 col-md-6"><%= student != null ? student.getAddress() : "" %></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 text-center mt-4">
+                                        <button onclick="showUpdateForm()" class="btn btn-warning">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Update Form -->
+                            <div id="updateForm" style="display: none;">
+                                <form action="StudentControllerURL?service=updateP" method="post">
+                                    <input type="hidden" name="studentID" value="<%= sID %>">
+                                    <input type="hidden" name="userID" value="<%= userName %>">
+
+                                    <div class="row mb-3">
+                                        <label class="col-lg-4 col-md-6 label" for="fullName">Full Name:</label>
+                                        <div class="col-lg-8 col-md-6">
+                                            <input type="text" id="fullName" name="fullName" class="form-control" value="<%= student != null ? student.getFullName() : "" %>">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-lg-4 col-md-6 label" for="dob">Date of Birth:</label>
+                                        <div class="col-lg-8 col-md-6">
+                                            <input type="date" id="dob" name="dob" class="form-control" value="<%= student != null ? student.getDob() : "" %>">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-lg-4 col-md-6 label" for="age">Age:</label>
+                                        <div class="col-lg-8 col-md-6">
+                                            <input type="number" id="age" name="age" class="form-control" value="<%= student != null ? student.getAge() : "" %>">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-lg-4 col-md-6 label" for="gender">Gender:</label>
+                                        <div class="col-lg-8 col-md-6">
+                                            <select id="gender" name="gender" class="form-control">
+                                                <option value="Male" <%= student != null && "Male".equals(student.getGender()) ? "selected" : "" %>>Male</option>
+                                                <option value="Female" <%= student != null && "Female".equals(student.getGender()) ? "selected" : "" %>>Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-lg-4 col-md-6 label" for="address">Address:</label>
+                                        <div class="col-lg-8 col-md-6">
+                                            <input type="text" id="address" name="address" class="form-control" value="<%= student != null ? student.getAddress() : "" %>">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 text-center mt-4">
+                                            <button type="submit" class="btn btn-success">Save</button>
+                                            <button type="button" onclick="location.reload()" class="btn btn-secondary">Cancel</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                             
                         </div>
@@ -106,6 +165,7 @@
             </div>
         </section>
     </main>
+                                
     <%@include file="Footer.jsp"%>
   
   <!-- Vendor JS Files -->

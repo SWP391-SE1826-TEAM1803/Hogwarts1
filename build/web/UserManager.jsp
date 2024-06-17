@@ -50,6 +50,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">User ID</th>
+                                    <th scope="col">Password</th>
                                     <th scope="col">Full name</th>
                                     <th scope="col">Gender</th>
                                     <th scope="col">Address</th>
@@ -65,6 +66,7 @@
                                 %>
                                 <tr>
                                     <td><%= user.getUserID() %></td>
+                                    <td><%= user.getPassword() %></td>
                                     <td><%= user.getFullName() %></td>
                                     <td><%= user.getGender() %></td>
                                     <td><%= user.getAddress() %></td>

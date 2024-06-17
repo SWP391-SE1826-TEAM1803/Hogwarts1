@@ -22,6 +22,9 @@ public class TeacherController extends HttpServlet {
         DAOTeacher dao = new DAOTeacher();
         HttpSession session = request.getSession(true);
         
+                String userName = (String) session.getAttribute("userName");
+
+        
         String service = request.getParameter("service");
         if (service == null) {
             service = "listAll";
@@ -67,6 +70,8 @@ public class TeacherController extends HttpServlet {
             dao.removeTeacher(teacherID);
             response.sendRedirect("TeacherControllerURL?service=listAll");
         }
+        
+        
         
     }
 

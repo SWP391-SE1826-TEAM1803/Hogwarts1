@@ -28,10 +28,7 @@ public class StudentController extends HttpServlet {
         
         // Check if userName is in session
         String userName = (String) session.getAttribute("userName");
-        if (userName == null) {
-            response.sendRedirect("Login.jsp"); // Redirect to login page if user is not logged in
-            return;
-        }
+        
              
         
         String service = request.getParameter("service");
@@ -89,6 +86,25 @@ public class StudentController extends HttpServlet {
                 response.sendRedirect("StudentControllerURL?service=listAll");
             }
         }
+        if ("updateP".equals(service)) {
+            String studentID = request.getParameter("studentID");
+            String fullName = request.getParameter("fullName");
+            String dob = request.getParameter("dob");
+            int age = Integer.parseInt(request.getParameter("age"));
+            String gender = request.getParameter("gender");
+            String address = request.getParameter("address");
+            String userID = request.getParameter("userID");
+
+            Student student = new Student(studentID, fullName, dob, age, gender, address, userID);
+                dao.updateStudent(student);
+
+            
+
+            // Redirect back to the profile page with the updated data
+            response.sendRedirect("StudentControllerURL?service=viewProfile&sID="+studentID+"");
+        }
+    
+
 
         if (service.equals("delete")) {
             String studentID = request.getParameter("StudentID");
@@ -122,7 +138,7 @@ public class StudentController extends HttpServlet {
         
         if (service.equals("viewProfile")) {
             String sID = request.getParameter("sID");
-        Vector<Student> vector;
+            Vector<Student> vector;
         
         
             vector = dao.getAllStudents("SELECT * FROM [Student] WHERE StudentID = '" + sID + "'");

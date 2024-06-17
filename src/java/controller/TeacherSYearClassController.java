@@ -21,6 +21,8 @@ public class TeacherSYearClassController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         DAOTeacherSchoolYearClass dao = new DAOTeacherSchoolYearClass();
         HttpSession session = request.getSession(true);
+                String userName = (String) session.getAttribute("userName");
+
         
         String service = request.getParameter("service");
         if (service == null) {
@@ -74,6 +76,18 @@ public class TeacherSYearClassController extends HttpServlet {
             String syC_ID = request.getParameter("SyC_ID");
             dao.deleteTeacherSchoolYearClass(teacherID, syC_ID);
             response.sendRedirect("TeacherSchoolYearClassControllerURL?service=listAll");
+        }
+        
+        if (service.equals("listClasses")) {
+        Vector<TeacherSchoolYearClass> vector;
+        
+        
+            vector = dao.getAllTeacherSchoolYearClasses("SELECT * FROM [Teacher_SchoolYear_Class] WHERE TeacherID = '" + userName + "'");
+        
+
+        request.setAttribute("data", vector);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ClassesList.jsp");
+        dispatcher.forward(request, response);
         }
     }
 

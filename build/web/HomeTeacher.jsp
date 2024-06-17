@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="entity.StudentSchoolYearClass, entity.SchoolYearClass, entity.Class"%>
+<%@ page import="entity.StudentSchoolYearClass, entity.SchoolYearClass, entity.Class" %>
 <%@ page import="entity.Student, model.DAOStudent, model.DAOSchoolYearClass, model.DAOClass" %>
 <%@ page import="java.util.Vector" %>
 
@@ -44,9 +44,10 @@
 </head>
 
 <body>
-        <%@include file="HeaderParents.jsp"%>
-
-    <main id="main" class="main">
+    
+    <%@include file="HeaderTeacher.jsp"%>
+    
+   <main id="main" class="main">
         <div class="pagetitle">
             <h1>Student Class List</h1>
             <nav>
@@ -62,16 +63,21 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <%
-                                        DAOStudent daoS = new DAOStudent();
-                                        DAOSchoolYearClass daoSYC = new DAOSchoolYearClass();
-                                        DAOClass daoC = new DAOClass();
-                                        Vector<StudentSchoolYearClass> studentsClass = (Vector<StudentSchoolYearClass>) request.getAttribute("data");
-                                        if (studentsClass != null) {
-                                        StudentSchoolYearClass SSyClass = studentsClass.get(0);
-                                        Vector <SchoolYearClass> syClassObj = daoSYC.getAllSchoolYearClasses("Select * from [SchoolYear_Class] where SyC_ID = '"+SSyClass.getSyC_ID() +"'");
-                                        SchoolYearClass syClass = syClassObj.get(0);
-                                        Vector<Class> classObj = daoC.getAllClasses("select * from[Class] where ClassID = '"+syClass.getClassID()+"'");
-                                        Class class0 = classObj.get(0);
+                            DAOStudent daoS = new DAOStudent();
+                            DAOSchoolYearClass daoSYC = new DAOSchoolYearClass();
+                            DAOClass daoC = new DAOClass();
+                            Vector<StudentSchoolYearClass> studentsClass = (Vector<StudentSchoolYearClass>) request.getAttribute("data");
+
+                            if (studentsClass != null && !studentsClass.isEmpty()) {
+                                StudentSchoolYearClass SSyClass = studentsClass.get(0);
+                                Vector<SchoolYearClass> syClassObj = daoSYC.getAllSchoolYearClasses("Select * from [SchoolYear_Class] where SyC_ID = '" + SSyClass.getSyC_ID() + "'");
+                                SchoolYearClass syClass = syClassObj.size() > 0 ? syClassObj.get(0) : null;
+
+                                if (syClass != null) {
+                                    Vector<Class> classObj = daoC.getAllClasses("select * from [Class] where ClassID = '" + syClass.getClassID() + "'");
+                                    Class class0 = classObj.size() > 0 ? classObj.get(0) : null;
+
+                                    if (class0 != null) {
                         %>
                         <div class="card-body">
                             <h5 class="card-title"><%= class0.getClassName() %></h5>
@@ -86,31 +92,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% 
-                                       
-                                            for (StudentSchoolYearClass studentc : studentsClass) {
-                                                Vector<Student> studentObj = daoS.getAllStudents("SELECT * FROM [Student] WHERE StudentID = '" + studentc.getStudentID() + "'");
-                                                for (Student stu : studentObj) {
+                                    <%
+                                        for (StudentSchoolYearClass studentc : studentsClass) {
+                                            Vector<Student> studentObj = daoS.getAllStudents("SELECT * FROM [Student] WHERE StudentID = '" + studentc.getStudentID() + "'");
 
+                                            for (Student stu : studentObj) {
                                     %>
                                     <tr>
                                         <td><%= studentc.getStudentID() %></td>
-                                        <td><%=stu.getFullName()%></td>
-                                        <td><%=stu.getGender()%></td>
-                                        <td><%=stu.getAddress()%></td>
+                                        <td><%= stu.getFullName() %></td>
+                                        <td><%= stu.getGender() %></td>
+                                        <td><%= stu.getAddress() %></td>
                                         <td><%= studentc.getSyC_ID() %></td>
                                     </tr>
-                                    <% 
-                                        }
+                                    <%
                                             }
-%>
-                                    
+                                        }
+                                    %>
                                 </tbody>
                             </table>
                         </div>
-                                    <%
-                                        }
-                                    %>
+                        <%
+                                    }
+                                }
+                            }
+                        %>
                     </div>
                 </div>
             </div>

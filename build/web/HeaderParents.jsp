@@ -7,6 +7,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="entity.Student, entity.StudentSchoolYearClass, model.DAOStudentSchoolYearClass, model.DAOStudent" %>
 <%@ page import="java.util.Vector" %>
+<%
+    String userName = (String) session.getAttribute("userName");
+    String role = (String) session.getAttribute("role");
+
+    if (userName == null || !"Parent".equals(role)) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -213,7 +222,6 @@
         
         <%
                             // Assuming the username is stored in a session attribute called "username"
-                            String username = (String)session.getAttribute("userName");
                                                         String StudentID = (String)session.getAttribute("sID");
 
         %>
@@ -223,12 +231,12 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><%=username%></span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"><%=userName%></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><%=username%></h6>
+              <h6><%=userName%></h6>
               <span>User</span>
             </li>
             <li>
@@ -320,7 +328,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="SchoolYearControllerURL?service=listAll">
+                    <a class="nav-link collapsed" href="SchedulesControllerURL?serviceviewSchedules&sID=<%=StudentID%>">
                         <i class="bi bi-calendar"></i>
                         <span>Schedules</span>
                     </a>

@@ -75,7 +75,7 @@ public class FeedbackController extends HttpServlet {
 
             Vector<Feedback> vector = dao.getAllFeedbacks("SELECT * FROM Feedback where StudentID ='"+sID+"'" );
             request.setAttribute("dataf", vector);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("FeedbackList.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ViewFeedback.jsp");
             dispatcher.forward(request, response);
         }
     }

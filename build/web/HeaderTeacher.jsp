@@ -11,7 +11,7 @@
     String userName = (String) session.getAttribute("userName");
     String role = (String) session.getAttribute("role");
 
-    if (userName == null || !"Parent".equals(role)) {
+    if (userName == null || !"Teacher".equals(role)) {
         response.sendRedirect("Login.jsp");
         return;
     }
@@ -220,11 +220,7 @@
 
         </li><!-- End Messages Nav -->
         
-        <%
-                            // Assuming the username is stored in a session attribute called "username"
-                                                        String StudentID = (String)session.getAttribute("sID");
-
-        %>
+       
          
 
         <li class="nav-item dropdown pe-3">
@@ -294,7 +290,7 @@
             <ul class="sidebar-nav" id="sidebar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link " href="StudentControllerURL?service=showPage&sID=<%= StudentID %>">
+                    <a class="nav-link " href="StudentControllerURL?service=showPage&sID=">
                         <i class="bi bi-house"></i>
                         <span>Home</span>
                     </a>
@@ -304,31 +300,9 @@
 
                 <li class="nav-heading">View</li>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="StudentControllerURL?service=viewProfile&sID=<%= StudentID %>">
-                        <i class="bi bi-person"></i>
-                        <span>Profile</span>
-                    </a>
-                </li><!-- End Profile Page Nav -->
-                
-                
                 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="StudentControllerURL?service=viewStudentClass&sID=<%=StudentID %>">
-                        <i class="bi bi-door-open"></i>
-                        <span>Classes</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="TeacherControllerURL?service=listAll">
-                        <i class="bi bi-pen"></i>
-                        <span>Teachers</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="SchedulesControllerURL?serviceviewSchedules&sID=<%=StudentID%>">
+                    <a class="nav-link collapsed" href="SchoolYearControllerURL?service=listAll">
                         <i class="bi bi-calendar"></i>
                         <span>Schedules</span>
                     </a>
@@ -343,7 +317,7 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="FeedbackControllerURL?service=viewFeedBack&sID=<%=StudentID%>">
+                    <a class="nav-link collapsed" href="FeedbackControllerURL?service=viewFeedBack&sID=">
                         <i class="bi bi-chat-left-dots"></i>
                         <span>Feedback</span>
                     </a>

@@ -56,11 +56,8 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Feedback ID</th>
                         <th scope="col">Date</th>
                         <th scope="col">Content</th>
-                        <th scope="col">Student ID</th>
-                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,14 +67,8 @@
                         for (Feedback feedback : feedbacks) {
                     %>
                     <tr>
-                        <td><%= feedback.getFeedbackID() %></td>
                         <td><%= feedback.getDate() %></td>
                         <td><%= feedback.getContent() %></td>
-                        <td><%= feedback.getStudentID() %></td>
-                        <td>
-                            <a href="FeedbackControllerURL?service=update&FeedbackID=<%= feedback.getFeedbackID() %>" class="btn btn-warning btn-sm">Update</a>
-                            <a href="FeedbackControllerURL?service=delete&FeedbackID=<%= feedback.getFeedbackID() %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this feedback?');">Delete</a>
-                        </td>
                     </tr>
                     <%
                         }
@@ -85,8 +76,6 @@
                 </tbody>
             </table>
        
-        <a href="addFeedback.jsp" class="btn btn-primary mt-3">Add Feedback</a>
-        <a href="FeedbackControllerURL?service=listAll" class="btn btn-secondary mt-3">Back to All Feedbacks</a>
     </div>
     </main>
     

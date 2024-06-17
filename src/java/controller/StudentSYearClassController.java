@@ -75,6 +75,18 @@ public class StudentSYearClassController extends HttpServlet {
             dao.deleteStudentSchoolYearClass(studentID, syC_ID);
             response.sendRedirect("StudentSchoolYearClassControllerURL?service=listAll");
         }
+        
+        if (service.equals("showTeacherPage")) {
+            String SyC_ID = request.getParameter("SyC_ID");
+            session.setAttribute("SyC_ID", SyC_ID);
+        Vector<StudentSchoolYearClass> vector;
+        
+        
+            vector = dao.getAllStudentSchoolYearClasses("SELECT * FROM [Student_SchoolYear_Class] WHERE SyC_ID = '" + SyC_ID + "'");
+            request.setAttribute("data", vector);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("HomeTeacher.jsp");
+        dispatcher.forward(request, response);
+        }
 
         
 

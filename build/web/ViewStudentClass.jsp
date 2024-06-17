@@ -5,9 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="entity.StudentSchoolYearClass"%>
-<%@ page import="entity.Student, model.DAOStudent" %>
+<%@ page import="entity.StudentSchoolYearClass, entity.SchoolYearClass, entity.Class"%>
+<%@ page import="entity.Student, model.DAOStudent, model.DAOSchoolYearClass, model.DAOClass" %>
 <%@ page import="java.util.Vector" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,45 +61,56 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
+                        <%
+                                        DAOStudent daoS = new DAOStudent();
+                                        DAOSchoolYearClass daoSYC = new DAOSchoolYearClass();
+                                        DAOClass daoC = new DAOClass();
+                                        Vector<StudentSchoolYearClass> studentsClass = (Vector<StudentSchoolYearClass>) request.getAttribute("data");
+                                        if (studentsClass != null) {
+                                        StudentSchoolYearClass SSyClass = studentsClass.get(0);
+                                        Vector <SchoolYearClass> syClassObj = daoSYC.getAllSchoolYearClasses("Select * from [SchoolYear_Class] where SyC_ID = '"+SSyClass.getSyC_ID() +"'");
+                                        SchoolYearClass syClass = syClassObj.get(0);
+                                        Vector<Class> classObj = daoC.getAllClasses("select * from[Class] where ClassID = '"+syClass.getClassID()+"'");
+                                        Class class0 = classObj.get(0);
+                        %>
                         <div class="card-body">
-                            <h5 class="card-title">Students in the Same Class</h5>
+                            <h5 class="card-title"><%= class0.getClassName() %></h5>
                             <table class="table table-borderless datatable">
                                 <thead>
                                     <tr>
                                         <th scope="col">Student ID</th>
-                                        <th scope="col">Student ID</th>
-                                        
+                                        <th scope="col">Full Name</th>
+                                        <th scope="col">Gender</th>
+                                        <th scope="col">Address</th>
                                         <th scope="col">School Year Class ID</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <% 
-                                        DAOStudent dao = new DAOStudent();
-                                        Vector<StudentSchoolYearClass> studentsClass = (Vector<StudentSchoolYearClass>) request.getAttribute("data");
-                                        if (studentsClass != null) {
+                                       
                                             for (StudentSchoolYearClass studentc : studentsClass) {
-                                                                            Vector<Student> studentObj = dao.getAllStudents("SELECT * FROM [Student] WHERE StudentID = '" + 
-                                                                            studentc.getStudentID() + "'");
+                                                Vector<Student> studentObj = daoS.getAllStudents("SELECT * FROM [Student] WHERE StudentID = '" + studentc.getStudentID() + "'");
+                                                for (Student stu : studentObj) {
 
                                     %>
                                     <tr>
                                         <td><%= studentc.getStudentID() %></td>
-                                        <td><%=studentObj.getFullName()%></td>
+                                        <td><%=stu.getFullName()%></td>
+                                        <td><%=stu.getGender()%></td>
+                                        <td><%=stu.getAddress()%></td>
                                         <td><%= studentc.getSyC_ID() %></td>
                                     </tr>
                                     <% 
-                                            }
-                                        } else {
-                                    %>
-                                    <tr>
-                                        <td colspan="2">No students found.</td>
-                                    </tr>
-                                    <% 
                                         }
-                                    %>
+                                            }
+%>
+                                    
                                 </tbody>
                             </table>
                         </div>
+                                    <%
+                                        }
+                                    %>
                     </div>
                 </div>
             </div>

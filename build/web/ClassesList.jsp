@@ -5,11 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="entity.Student" %>
+<%@ page import="entity.TeacherSchoolYearClass" %>
 <%@ page import="java.util.Vector" %>
-<%@ page import="java.util.Vector" %>
-<%@ page import="entity.Feedback" %>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,47 +37,73 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+<style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card-custom {
+      width: 300px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .card-custom .icon {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .card-custom .icon i {
+      font-size: 20px;
+      margin-right: 8px;
+    }
+    .card-custom .course-id {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .card-custom .details {
+      margin-bottom: 8px;
+    }
+    .card-custom .details i {
+      margin-right: 4px;
+    }
+    .card-custom .link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
   
 </head>
 
 <body>
-    <%@include file="HeaderParents.jsp"%>
-    <main id="main" class="main">
-
-    <div class="container mt-5">
-        <h2 class="mb-4">Feedback List for Student</h2>
-        
-        
-           
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Content</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%
-                            Vector<Feedback> feedbacks = (Vector<Feedback>) request.getAttribute("dataf");
-
-                        for (Feedback feedback : feedbacks) {
-                    %>
-                    <tr>
-                        <td><%= feedback.getDate() %></td>
-                        <td><%= feedback.getContent() %></td>
-                    </tr>
-                    <%
-                        }
-                    %>
-                </tbody>
-            </table>
-       
+            
+<div class="d-flex flex-wrap justify-content-center">
+      <%
+        Vector<TeacherSchoolYearClass> teachers = (Vector<TeacherSchoolYearClass>) request.getAttribute("data");
+        if (teachers != null) {
+          for (TeacherSchoolYearClass teacher : teachers) { 
+      %>
+        <div class="card-custom">
+          <div class="course-id"><%= teacher.getSyC_ID() %></div>
+          <div class="icon"><i class="bi bi-door-open"></i><%= teacher.getSyC_ID() %></div>
+          <div class="link">
+            <form action="StudentSYearClassControllerURL" method="get">
+              <input type="hidden" name="service" value="showTeacherPage">
+              <input type="hidden" name="SyC_ID" value="<%= teacher.getSyC_ID() %>">
+              <button type="submit" class="btn btn-primary">Choose</button>
+            </form>
+          </div>
+        </div>
+      <%
+          }
+        }
+      %>
     </div>
-    </main>
-    
-    <%@include file="Footer.jsp"%>
-  
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

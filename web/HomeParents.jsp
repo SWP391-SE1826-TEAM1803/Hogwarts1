@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="entity.Student" %>
 <%@ page import="java.util.Vector" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +48,7 @@
     <%
                                           Vector<Student> students = (Vector<Student>) request.getAttribute("data");
                                           Student student = null;
-            student = students.get(0);
+                                          student = students.get(0);
                                         %>
     <main id="main" class="main">
 
