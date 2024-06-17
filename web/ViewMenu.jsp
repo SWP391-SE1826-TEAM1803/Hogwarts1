@@ -5,9 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="java.util.Vector, entity.Schedules, entity.CurriculumDate, entity.CurDateAct" %>
-<%@ page import=" model.DAOSchedules, model.DAOCurriculumDate, model.DAOCurDateAct" %>
-
+<%@ page import="entity.ClassCategoryMenu, entity.Menu, model.DAOMenu" %>
+<%@ page import="java.util.Vector" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,14 +45,14 @@
 <body>
     
     <%@include file="HeaderParents.jsp"%>
-    
-    <main id="main" class="main">
+   
+     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Schedules</h1>
+            <h1>Menu</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HomeAdmin.jsp">Home</a></li>
-                    <li class="breadcrumb-item active">Schedules</li>
+                    <li class="breadcrumb-item active">Menu</li>
                 </ol>
             </nav>
         </div>
@@ -69,36 +68,33 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Date</th>
-                                        <th scope="col">From</th>
-                                        <th scope="col">To</th>
-                                        <th scope="col">Act</th>
+                                        <th scope="col">Meal</th>
+                                        <th scope="col">Menu</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <%
-                                        DAOCurriculumDate daoCD = new DAOCurriculumDate();
-                                        DAOCurDateAct daoCDA = new DAOCurDateAct();
-                            Vector<Schedules> schedules = (Vector<Schedules>) request.getAttribute("data");
+                               DAOMenu daoM = new DAOMenu();         
+                            Vector<ClassCategoryMenu> ccMenus = (Vector<ClassCategoryMenu>) request.getAttribute("data");
                             
 
-                        for (Schedules schedule : schedules) {
+                        for (ClassCategoryMenu ccMenu : ccMenus) {
                        
-                        Vector<CurDateAct> vectorCurDateAct = daoCDA.getAllCurDateActs("SELECT * FROM [CurDateAct] WHERE CurDateID = '" + schedule.getCurDateID() + "'");
-                        for (CurDateAct curDateAct : vectorCurDateAct){
+                      Vector<Menu> menu = daoM.getAllMenus("select * from [Menu] where MenuID = '"+ccMenu.getMenuID()+"'");
+
+
 
                     %>
                                     <tr>
-                                        <td><%= schedule.getDate() %></td>
-                                        <td><%= curDateAct.getTimeStart() %></td>
-                                        <td><%= curDateAct.getTimeEnd() %></td>
-                                        <td><%= curDateAct.getAct() %></td>
-                                        
+                                        <td><%= ccMenu.getDate() %></td>
+                                        <td><%= ccMenu.getMeal() %></td>
+                                         <td><%= menu.get(0).getFood() %></td>
                                         
                                     </tr>
                                     <% 
                                         
                                         }
-}
+
                                             
 %>
                                     

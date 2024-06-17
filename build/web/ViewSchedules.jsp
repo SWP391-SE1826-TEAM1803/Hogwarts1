@@ -49,11 +49,11 @@
     
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Student Class List</h1>
+            <h1>Schedules</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="HomeAdmin.jsp">Home</a></li>
-                    <li class="breadcrumb-item active">Student Class List</li>
+                    <li class="breadcrumb-item active">Schedules</li>
                 </ol>
             </nav>
         </div>

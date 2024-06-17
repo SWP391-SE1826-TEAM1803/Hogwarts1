@@ -336,7 +336,7 @@
 
           
                     <li class="nav-item">
-                    <a class="nav-link collapsed" href="MenuControllerURL?service=listAll">
+                    <a class="nav-link collapsed" href="MenuControllerURL?service=viewMenu&sID=<%=StudentID%>">
                         <i class="bi bi-egg"></i>
                         <span>Menus</span>
                     </a>
