@@ -328,7 +328,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="SchedulesControllerURL?serviceviewSchedules&sID=<%=StudentID%>">
+                    <a class="nav-link collapsed" href="SchedulesControllerURL?service=viewSchedules&sID=<%=StudentID%>">
                         <i class="bi bi-calendar"></i>
                         <span>Schedules</span>
                     </a>
