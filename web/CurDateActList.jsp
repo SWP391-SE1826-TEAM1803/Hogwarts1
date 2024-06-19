@@ -91,11 +91,11 @@
                             <table class="table table-borderless datatable mt-3">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Activity ID</th>
+<!--                                        <th scope="col">Activity ID</th>-->
                                         <th scope="col">Activity</th>
                                         <th scope="col">Start Time</th>
                                         <th scope="col">End Time</th>
-                                        <th scope="col">Curriculum Date ID</th>
+<!--                                        <th scope="col">Curriculum Date ID</th>-->
                                         <th scope="col" style="text-align: center;">Actions</th>
                                     </tr>
                                 </thead>
@@ -106,11 +106,11 @@
                                         for (CurDateAct act : acts) {
                                     %>
                                     <tr>
-                                        <td><%= act.getCdtID() %></td>
+<!--                                        <td><%= act.getCdtID() %></td></td>-->
                                         <td><%= act.getAct() %></td>
                                         <td><%= act.getTimeStart() %></td>
                                         <td><%= act.getTimeEnd() %></td>
-                                        <td><%= act.getCurDateID() %></td>
+<!--                                        <td><%= act.getCurDateID() %></td>-->
                                         <td style="text-align: center;">
                                             <a class="btn btn-outline-warning btn-sm" href="CurDateActControllerURL?service=updateCurDateAct&CdtID=<%= act.getCdtID() %>">Update</a>
                                             <a class="btn btn-outline-danger btn-sm" href="CurDateActControllerURL?service=deleteCurDateAct&CdtID=<%= act.getCdtID() %>">Delete</a>

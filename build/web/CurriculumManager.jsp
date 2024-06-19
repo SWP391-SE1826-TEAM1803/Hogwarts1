@@ -75,9 +75,9 @@
                             <table class="table table-borderless datatable mt-3">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Curriculum ID</th>
+<!--                                        <th scope="col">Curriculum ID</th>-->
                                         <th scope="col">Curriculum Name</th>
-                                        <th scope="col">Category ID</th>
+<!--                                        <th scope="col">Category ID</th>-->
                                         <th scope="col" style="text-align: center;">Detail</th>
                                         <th scope="col" style="text-align: center;">Actions</th>
                                     </tr>
@@ -89,9 +89,9 @@
                                         for (Curriculum curriculum : curriculums) {
                                     %>
                                     <tr>
-                                        <td><%= curriculum.getCurID() %></td>
+<!--                                        <td><%= curriculum.getCurID() %></td>-->
                                         <td><%= curriculum.getCurName() %></td>
-                                        <td><%= curriculum.getCateID() %></td>
+<!--                                        <td><%= curriculum.getCateID() %></td>-->
                                        <td style="text-align: center;">
                                     <a class="btn btn-outline-info btn-icon-text" href="CurriculumDateControllerURL?service=searchByCurID&CurID=<%= curriculum.getCurID() %>">
                                         <i class="mdi mdi-information"></i> Detail

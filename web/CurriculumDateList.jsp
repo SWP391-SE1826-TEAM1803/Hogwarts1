@@ -89,9 +89,9 @@
                             <table class="table table-borderless datatable mt-3">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Curriculum Date ID</th>
+                                        
                                         <th scope="col">Date Number</th>
-                                        <th scope="col">Curriculum ID</th>
+                                        
                                         <th scope="col" style="text-align: center;">Detail</th>
                                         <th scope="col" style="text-align: center;">Actions</th>
                                     </tr>
@@ -103,9 +103,9 @@
                                         for (CurriculumDate date : dates) {
                                     %>
                                     <tr>
-                                        <td><%= date.getCurDateID() %></td>
+                                        
                                         <td><%= date.getDateNumber() %></td>
-                                        <td><%= date.getCurID() %></td>
+                                        
                                         <td style="text-align: center;">
                                     <a class="btn btn-outline-info btn-icon-text" href="CurDateActControllerURL?service=searchByCurDateID&CurDateID=<%= date.getCurDateID() %>">
                                         <i class="mdi mdi-information"></i> Detail
