@@ -21,7 +21,7 @@ public class LoginController extends HttpServlet {
 
         if (service.equals("Login")) {
             String role = request.getParameter("role");
-            String user = request.getParameter("username");
+            String user = request.getParameter("email");
             String password = request.getParameter("password");
             boolean account = dao.login(role, user, password);
 

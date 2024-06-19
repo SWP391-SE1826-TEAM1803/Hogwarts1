@@ -55,11 +55,11 @@
     <%@include file="HeaderParents.jsp"%>
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Student Profile</h1>
+            <h1>Teacher</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a>Home</a></li>
-                    <li class="breadcrumb-item active">Teacher Profile</li>
+                    <li class="breadcrumb-item active">Teacher</li>
                 </ol>
             </nav>
         </div>

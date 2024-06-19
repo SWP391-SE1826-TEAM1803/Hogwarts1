@@ -10,6 +10,7 @@
             <file>file:/D:/SU24/Project/Hogwarts/src/java/controller/StudentController.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/src/java/model/DAOCurriculum.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/src/java/controller/SchoolYearClassController.java</file>
+            <file>file:/D:/SU24/Project/Hogwarts/src/java/entity/SchoolYearClass.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/src/java/model/DAOTeacherSchoolYearClass.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/UpdateStudent.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/UpdateFeedback.jsp</file>
@@ -31,17 +32,20 @@
             <file>file:/D:/SU24/Project/Hogwarts/web/ClassesList.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/InsertTeacher.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/src/java/entity/Teacher.java</file>
+            <file>file:/D:/SU24/Project/Hogwarts/src/java/model/DAOCurriculumDate.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/UpdateMenu.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/FeedbackList.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/SchoolYearDetail.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/InsertClassCategoryMenu.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/Login.jsp</file>
+            <file>file:/D:/SU24/Project/Hogwarts/web/ViewTeacher.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/InsertUser.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/HeaderParents.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/src/java/model/DAOSchedules.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/src/java/controller/CurriculumController.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/UserManager.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/MenuList.jsp</file>
+            <file>file:/D:/SU24/Project/Hogwarts/web/ViewSchedules.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/InsertMenu.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/HeaderAdmin.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/InsertFeedback.jsp</file>
@@ -49,15 +53,19 @@
             <file>file:/D:/SU24/Project/Hogwarts/src/java/model/DAOStudentSchoolYearClass.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/index.html</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/HeaderTeacher.jsp</file>
+            <file>file:/D:/SU24/Project/Hogwarts/src/java/controller/UserController.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/InsertSchoolYear.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/CurriculumDateList.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/src/java/controller/TeacherSYearClassController.java</file>
+            <file>file:/D:/SU24/Project/Hogwarts/src/java/controller/MenuController.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/src/java/controller/ClassController.java</file>
+            <file>file:/D:/SU24/Project/Hogwarts/web/ViewMenu.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/src/java/controller/CurriculumDateController.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/SchoolYearManager.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/src/java/model/DAOUser.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/HomeParents.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/assets/js/main.js</file>
+            <file>file:/D:/SU24/Project/Hogwarts/src/java/model/DAOCurDateAct.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/ClassCategoryMenuList.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/ClassManager.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/UpdateSchoolYear.jsp</file>
@@ -71,6 +79,7 @@
             <file>file:/D:/SU24/Project/Hogwarts/web/HomeTeacher.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/ClassCategoryList.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/src/java/model/DBConnect.java</file>
+            <file>file:/D:/SU24/Project/Hogwarts/src/java/entity/Schedules.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/web/InsertClass.jsp</file>
             <file>file:/D:/SU24/Project/Hogwarts/src/java/controller/CurDateActController.java</file>
             <file>file:/D:/SU24/Project/Hogwarts/src/java/controller/SchoolYearController.java</file>

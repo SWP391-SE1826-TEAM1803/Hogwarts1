@@ -13,17 +13,16 @@ public class DAOUser extends DBConnect {
 
     public int insertUser(User user) {
         int n = 0;
-        String sql = "INSERT INTO [User] (UserID, FullName, Gender, Address, Phone, Email, Role, Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [User] (FullName, Gender, Address, Phone, Email, Role, Password) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setString(1, user.getUserID());
-            pre.setString(2, user.getFullName());
-            pre.setString(3, user.getGender());
-            pre.setString(4, user.getAddress());
-            pre.setString(5, user.getPhone());
-            pre.setString(6, user.getEmail());
-            pre.setString(7, user.getRole());
-            pre.setString(8, user.getPassword());
+            pre.setString(1, user.getFullName());
+            pre.setString(2, user.getGender());
+            pre.setString(3, user.getAddress());
+            pre.setString(4, user.getPhone());
+            pre.setString(5, user.getEmail());
+            pre.setString(6, user.getRole());
+            pre.setString(7, user.getPassword());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,14 +71,14 @@ public class DAOUser extends DBConnect {
                     ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = state.executeQuery(sql);
             while (rs.next()) {
-                String userID = rs.getString(1);
-                String fullName = rs.getString(2);
-                String gender = rs.getString(3);
-                String address = rs.getString(4);
-                String phone = rs.getString(5);
-                String email = rs.getString(6);
-                String role = rs.getString(7);
-                String password = rs.getString(8);
+                String userID = rs.getString("UserID");
+                String fullName = rs.getString("FullName");
+                String gender = rs.getString("Gender");
+                String address = rs.getString("Address");
+                String phone = rs.getString("Phone");
+                String email = rs.getString("Email");
+                String role = rs.getString("Role");
+                String password = rs.getString("Password");
                 User user = new User(userID, fullName, gender, address, phone, email, role, password);
                 vector.add(user);
             }
@@ -89,11 +88,11 @@ public class DAOUser extends DBConnect {
         return vector;
     }
 
-    public boolean login(String role, String userName, String password) {
-        String sql = "select * from [User] where UserID=? and Password=? and Role=?";
+    public boolean login(String role, String email, String password) {
+        String sql = "select * from [User] where Email=? and Password=? and Role=?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setString(1, userName);
+            pre.setString(1, email);
             pre.setString(2, password);
             pre.setString(3, role);
 
@@ -105,7 +104,6 @@ public class DAOUser extends DBConnect {
             Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-
     }
 
     public User getUserByID(String userID) {
@@ -146,14 +144,11 @@ public class DAOUser extends DBConnect {
         return count;
     }
 
-
-
     public static void main(String[] args) {
         DAOUser dao = new DAOUser();
         boolean check = dao.login("Parent", "PA001", "123");
         if (check = true) {
             System.out.print("ok");
         }
-
     }
 }

@@ -23,7 +23,7 @@ public class DBConnect {
         }
    }
     public DBConnect() {
-        this("jdbc:sqlserver://localhost:1433;databaseName=hw1",
+        this("jdbc:sqlserver://localhost:1433;databaseName=hw10",
                 "sa","12345678");
     }
     public ResultSet getData(String sql){

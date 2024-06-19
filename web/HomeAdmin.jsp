@@ -67,7 +67,7 @@
                     <div class="col-xxl-4 col-xl-6 mb-3">
                         <div class="card info-card customers-card">
                             <div class="card-body">
-                                <h5 class="card-title">Accounts <span>| This Year</span></h5>
+                                <h5 class="card-title">Users <span>| This Year</span></h5>
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-person"></i>

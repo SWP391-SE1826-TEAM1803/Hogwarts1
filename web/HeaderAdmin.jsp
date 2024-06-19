@@ -298,7 +298,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="UserControllerURL?service=listAll">
                         <i class="bi bi-person"></i>
-                        <span>Accounts</span>
+                        <span>Users</span>
                     </a>
                 </li><!-- End Profile Page Nav -->
 

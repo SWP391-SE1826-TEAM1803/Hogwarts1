@@ -75,8 +75,8 @@
                                         <form class="row g-3 needs-validation" action="LoginControllerURL" method="GET">
 
                                             <div class="col-12">
-                                                <label  class="form-label">Username</label>
-                                                <input type="text" name="username" class="form-control" id="yourUsername" required>
+                                                <label  class="form-label">Email</label>
+                                                <input type="text" name="email" class="form-control" id="yourUsername" required>
                                                 <div class="invalid-feedback">Please enter your username.</div>
                                             </div>
 
